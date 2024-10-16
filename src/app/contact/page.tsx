@@ -42,7 +42,7 @@ const Contact = () => {
               onSubmit={handleSubmit}
               className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
             >
-              <h3 className="text-4xl text-accent">Let`&lsquo;`s Work Together</h3>
+              <h3 className="text-4xl text-accent">Let&lsquo;s Work Together</h3>
               <p className="text-white/60">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
                 corporis nihil cumque.
@@ -54,8 +54,7 @@ const Contact = () => {
                 <Input type="email" placeholder="Email Address" required />
                 <Input type="tel" placeholder="Phone Number" required />
               </div>
-              <Textarea placeholder="Your Message" rows={4} required />
-
+              <Textarea placeholder="Your Message" rows={4} cols={20} required />
               {/* Submit button */}
               <button
                 type="submit"
