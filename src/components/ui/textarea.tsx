@@ -1,12 +1,15 @@
-import * as React from "react"
-
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  // You can add additional custom props here if needed
+  rows: any;
+  cols: any;
+}
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, rows, cols, ...props }, ref) => {
     return (
       <textarea
         className={cn(
@@ -14,11 +17,14 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           className
         )}
         ref={ref}
+        rows={rows} // Custom prop usage
+        cols={cols} // Custom prop usage
         {...props}
       />
-    )
+    );
   }
-)
-Textarea.displayName = "Textarea"
+);
 
-export { Textarea }
+Textarea.displayName = "Textarea";
+
+export { Textarea };

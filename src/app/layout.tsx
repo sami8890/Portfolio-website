@@ -1,11 +1,9 @@
 import { JetBrains_Mono } from "next/font/google"
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/ui/header";
 import PageTransition from "@/components/ui/PageTransition";
 import { StairTransition } from "@/components/ui/stairTransition";
-import Services from "./services/page";
 
 
 const jetbrainsMono = JetBrains_Mono({

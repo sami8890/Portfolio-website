@@ -1,5 +1,4 @@
-"use client";
-import { easeIn, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -12,8 +11,21 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Swiper as SwiperType } from "swiper"; // Correct type for swiper
 
-const projects = [
+// Define Project type
+interface Project {
+  num: string;
+  category: string;
+  title: string;
+  description: string;
+  stack: { name: string }[];
+  image: string;
+  live: string;
+  github: string;
+}
+
+const projects: Project[] = [
   {
     num: "01",
     category: "E-commerce Website",
@@ -56,10 +68,10 @@ const projects = [
 ];
 
 const Work = () => {
-  const [project, setProject] = useState(projects[0]);
-  const swiperRef = useRef<any>(null);
+  const [project, setProject] = useState<Project>(projects[0]); // Use typed state
+  const swiperRef = useRef<SwiperType | null>(null); // Updated swiperRef with correct type
 
-  const handleSlideChange = (swiper: any) => {
+  const handleSlideChange = (swiper: SwiperType) => {
     const currentSlide = swiper.activeIndex;
     setProject(projects[currentSlide]);
   };
@@ -79,7 +91,7 @@ const Work = () => {
   return (
     <motion.section
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { delay: 2.4, ease: "easeIn" } }}
+      animate={{ opacity: 1, transition: { delay: 2.4 } }} 
       className="min-h-[80vh] flex-col justify-center py-12 xl:px-0"
     >
       <div className="container mx-auto">
@@ -90,7 +102,6 @@ const Work = () => {
               {/* Project number with color */}
               <div className="text-8xl leading-none font-extrabold text-transparent text-stroke">
                 <span className="text-[#facc15] text-stroke-white">{project.num}</span>
-                {/* Base yellow color with white outline effect */}
               </div>
 
               {/* Project category */}
@@ -100,7 +111,7 @@ const Work = () => {
 
               <p className="text-white/60">{project.description}</p>
 
-              {/* Styled tech stack (green accent version only) */}
+              {/* Tech stack */}
               <ul className="flex gap-4">
                 {project.stack.map((item, index) => (
                   <li key={index} className="text-xl text-accent">
@@ -150,7 +161,7 @@ const Work = () => {
               spaceBetween={30}
               slidesPerView={1}
               onSlideChange={handleSlideChange}
-              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              onSwiper={(swiper) => (swiperRef.current = swiper)} // Corrected type here
               className="xl:h-[520px] max-h-[80vh] mb-12"
             >
               {projects.map((project, index) => (
@@ -169,7 +180,7 @@ const Work = () => {
               ))}
             </Swiper>
 
-            {/* Custom Next/Previous buttons with dark gray and blue hover effect */}
+            {/* Custom Next/Previous buttons */}
             <div className="flex justify-center gap-4">
               <button
                 className="px-6 py-2 bg-gray-700 text-white rounded-full hover:bg-green-600 hover:text-white transition-all duration-300"

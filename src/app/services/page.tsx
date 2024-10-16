@@ -1,7 +1,6 @@
 "use client";
 import { BsArrowDownRight } from "react-icons/bs";
 import { FaCode, FaSearch, FaVideo, FaPaintBrush } from "react-icons/fa"; // Importing service icons
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 const services = [
@@ -10,15 +9,15 @@ const services = [
     title: "Web Development",
     description:
       "I specialize in creating responsive and dynamic websites tailored to individual needs. I work closely with you to understand your business goals and I handle it all.",
-    href: "/web-development", // Example link
-    icon: <FaCode className="text-2xl" />, // Service icon
+    // href: "/web-development", 
+    icon: <FaCode className="text-2xl" />, 
   },
   {
     num: "02",
     title: "SEO Optimization",
     description:
       "I offer SEO services to boost your website's visibility and improve your search engine rankings through effective content strategies.",
-    href: "/seo-optimization", // Example link
+    // href: "/seo-optimization", // Example link
     icon: <FaSearch className="text-2xl" />, // Service icon
   },
   {
@@ -26,7 +25,7 @@ const services = [
     title: "Video Editing",
     description:
       "I have a little bit of experience in editing and optimizing videos for YouTube, TikTok, and other social media platforms. I offer a range of video editing services.",
-    href: "/video-editing", 
+    // href: "/video-editing", 
     icon: <FaVideo className="text-2xl" />, // Service icon
   },
   {
@@ -34,7 +33,7 @@ const services = [
     title: "UI/UX Design",
     description:
       "I focus on designing intuitive user interfaces that enhance user experience, ensuring your product is engaging and effective.",
-    href: "/ui-ux-design", // Example link
+    // href: "/ui-ux-design", // Example link
     icon: <FaPaintBrush className="text-2xl" />, // Service icon
   },
 ];

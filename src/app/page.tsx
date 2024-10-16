@@ -29,7 +29,7 @@ const HomePage = () => {
           <div className="text-center xl:text-left order-2 xl:order-none">
             <span className="text-xl">Front-end Web Developer</span>
             <h1 className="h1">
-              Hello I'm <br />
+              Hello I`&apos;`m <br />
               <span className="text-[#00ff99]">Sami Gabol</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80">

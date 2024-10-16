@@ -1,6 +1,5 @@
 "use client";
 
-// Importing icons from react-icons for skills representation
 import { FaHtml5, FaCss3, FaJs, FaReact, FaFigma } from "react-icons/fa";
 import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
 import { motion } from "framer-motion"; // Importing motion for animations
@@ -106,13 +105,7 @@ const getSkillColor = (skillName: string): string => {
 
 // Importing components for UI elements
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { ScrollArea } from "@/components/ui/scroll-area";
+
 
 import React from "react";
 

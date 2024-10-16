@@ -3,7 +3,7 @@ import { Button } from "./button"; // Import your custom Button component
 import React from "react";
 import Nav from "./nav";
 import { MobileNav } from "../MobileNav";
-import Contact from "@/app/contact/page";
+
 export default function Header() {
   return (
     <header className="py-2 xl:py-7 text-white">
