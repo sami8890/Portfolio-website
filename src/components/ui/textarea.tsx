@@ -3,9 +3,9 @@ import { cn } from "@/lib/utils";
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  // You can add additional custom props here if needed
-  rows: any;
-  cols: any;
+  // Specify that rows and cols should be numbers
+  rows?: number; 
+  cols?: number;
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(

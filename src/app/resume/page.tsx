@@ -1,6 +1,6 @@
 "use client";
 
-import { FaHtml5, FaCss3, FaJs, FaReact, FaFigma } from "react-icons/fa";
+import { FaHtml5, FaCss3, FaJs,FaFigma } from "react-icons/fa";
 import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
 import { motion } from "framer-motion"; // Importing motion for animations
 
