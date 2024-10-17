@@ -10,6 +10,7 @@ import Contact from "./contact/page";
 import Resume from "./resume/page";
 import Services from "./services/page";
 import Work from "./Projects/page";
+import CertificationsSection from "./certificates/page";
 
 const HomePage = () => {
   const [isDownloadComplete, setIsDownloadComplete] = useState(false);
@@ -66,13 +67,27 @@ const HomePage = () => {
 
       <Stats />
       <br />
+      {/* for sepration line */}
+      <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
       <Work />
       <br />
-       <Services />
+      <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
+
+      <Services />
       <br />
+      <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
+
       <Resume />
       <br />
+      <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
+      <CertificationsSection />
+      <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
+
+      <br />
       <Contact />
+      <br />
+
+
 
       {/* Notification after download */}
       {isDownloadComplete && (

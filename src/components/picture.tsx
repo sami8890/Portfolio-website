@@ -7,7 +7,7 @@ import React from "react";
 
 export const Picture = (): JSX.Element => {
   return (
-    <div className="w-full h-full relative flex items-center justify-center py-1">
+    <div className="w-full h-full relative flex items-center justify-center ">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{
@@ -38,7 +38,7 @@ export const Picture = (): JSX.Element => {
             priority
             quality={100}
             fill
-            alt="sami"
+            alt="sami-gabol"
             className="object-contain"
           />
         </motion.div>
