@@ -3,15 +3,15 @@ import CountUp from "react-countup";
 
 const stats = [
   {
-    num: 1,
-    text: "Years in Web Development",
+    num: 0.9,
+    text: "Typescript quarter 1 score",
   },
   {
     num: 10,
     text: "Projects Completed",
   },
   {
-    num: 10,
+    num: 11,
     text: "Node Projects",
   },
   {
@@ -20,6 +20,7 @@ const stats = [
   },
 ];
 
+// When displaying the value:
 export const Stats = () => {
   return (
     <section className="pt-10 pb-8 xl:pt-16 xl:pb-14">
@@ -28,10 +29,11 @@ export const Stats = () => {
           {stats.map((item, index) => (
             <div key={index} className="text-center">
               <CountUp
-                end={item.num}
+                end={item.num * (item.text === "Typescript quarter 1 score" ? 100 : 1)} // Multiply by 100 for Typescript score
                 duration={6} // Shortened duration for a quicker but smooth animation
                 delay={0.5}  // Short delay to make it look more dynamic
-                className="text-4xl xl:text-6xl font-bold text-[#00ff99]" 
+                className="text-4xl xl:text-6xl font-bold text-[#00ff99]"
+                suffix={item.text === "Typescript quarter 1 score" ? "%" : ""} // Add '%' for Typescript score
               />
               <p className="text-lg xl:text-xl mt-2 text-white opacity-80">{item.text}</p>
             </div>
