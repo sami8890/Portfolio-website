@@ -66,7 +66,7 @@ const projects: Project[] = [
     title: "Resume Builder App",
     description:
       "A web application created during a hackathon that allows users to easily generate a professional resume by filling out a simple form. The app automatically formats the resume and allows users to download it in various formats (PDF, DOCX). Built with React and styled using Tailwind CSS.",
-    stack: [{ name: "React" }, { name: "Tailwind CSS" }, { name: "Node.js" }],
+    stack: [{ name: "Html" }, { name: "CSS" }, { name: "Typescript" }],
     image: "/project4.png",
     live: "https://hackaton-milestone-no-5-bj6t.vercel.app/",
     github: "https://github.com/sami8890/hackaton-milestone-No-5.git",

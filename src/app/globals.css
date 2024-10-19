@@ -5,6 +5,7 @@
 
 body {
   background-color: #1c1c22;
+    cursor: url('/cursor.png'), auto; /* Replace with your custom cursor image */
 }
 
 /* body:hover{

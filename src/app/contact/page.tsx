@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
@@ -19,10 +20,44 @@ const info = [
 ];
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add form submission logic here, e.g., send data to an API.
-    console.log("Form submitted");
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setResponseMessage(result.message || "Message sent successfully!");
+      } else {
+        setResponseMessage(result.message || "Something went wrong.");
+      }
+    } catch (error) {
+      setResponseMessage("Failed to send the message.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -42,26 +77,59 @@ const Contact = () => {
               onSubmit={handleSubmit}
               className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
             >
-              <h3 className="text-4xl text-accent">Let&lsquo;s Work Together</h3>
+              <h3 className="text-4xl text-accent">Let’s Work Together</h3>
               <p className="text-white/60">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-                corporis nihil cumque.
+              I have not added back
               </p>
               {/* Input fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input type="text" placeholder="First Name" required />
-                <Input type="text" placeholder="Last Name" required />
-                <Input type="email" placeholder="Email Address" required />
-                <Input type="tel" placeholder="Phone Number" required />
+                <Input
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  required
+                  onChange={handleInputChange}
+                />
+                <Input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  required
+                  onChange={handleInputChange}
+                />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  required
+                  onChange={handleInputChange}
+                />
+                <Input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  required
+                  onChange={handleInputChange}
+                />
               </div>
-              <Textarea placeholder="Your Message" rows={4} cols={20} required />
+              <Textarea
+                name="message"
+                placeholder="Your Message"
+                rows={4}
+                required
+                onChange={handleInputChange}
+              />
               {/* Submit button */}
               <button
                 type="submit"
                 className="mt-4 px-6 py-2 bg-[#4ADE80] text-white rounded-lg hover:bg-[#83c067] transition-all"
+                disabled={loading}
               >
-                Submit
+                {loading ? "Sending..." : "Submit"}
               </button>
+              {responseMessage && (
+                <p className="text-white mt-4">{responseMessage}</p>
+              )}
             </form>
           </div>
 
@@ -69,8 +137,8 @@ const Contact = () => {
           <div className="flex-1 flex items-center xl:justify-self-start order-1 xl:order-none xl:mb-0 bg-[#27272c] p-10 rounded-xl h-[40vh]">
             <div className="flex flex-col gap-4">
               {info.map((item, index) => (
-                <div key={index} className="flex items-center gap-4 " >
-                 <div className="text-[#83c067]">{item.icon}</div>
+                <div key={index} className="flex items-center gap-4 ">
+                  <div className="text-[#83c067]">{item.icon}</div>
                   <div>
                     <h4>{item.title}</h4>
                     <p>{item.description}</p>
@@ -82,7 +150,11 @@ const Contact = () => {
         </div>
       </div>
     </motion.section>
+          
+
   );
+
 };
+
 
 export default Contact;
