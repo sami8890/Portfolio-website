@@ -49,7 +49,7 @@ const Contact = () => {
       } else {
         setResponseMessage(result.message || "Something went wrong.");
       }
-    } catch (error) {
+    } catch {
       setResponseMessage("Failed to send the message.");
     } finally {
       setLoading(false);
@@ -150,11 +150,7 @@ const Contact = () => {
         </div>
       </div>
     </motion.section>
-          
-
   );
-
 };
-
 
 export default Contact;
