@@ -12,7 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Swiper as SwiperType } from "swiper"; 
+import { Swiper as SwiperType } from "swiper";
 
 // Define Project type
 interface Project {
@@ -56,7 +56,7 @@ const projects: Project[] = [
       { name: "TypeScript" },
       { name: "Next.js" },
     ],
-    image: "/project 3.png",
+    image: "/project3.png",
     live: "#",
     github: "#",
   },
@@ -87,8 +87,8 @@ const projects: Project[] = [
 
 
 const Work = () => {
-  const [project, setProject] = useState<Project>(projects[0]); 
-  const swiperRef = useRef<SwiperType | null>(null); 
+  const [project, setProject] = useState<Project>(projects[0]);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const handleSlideChange = (swiper: SwiperType) => {
     const currentSlide = swiper.activeIndex;
