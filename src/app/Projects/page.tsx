@@ -79,7 +79,7 @@ const projects: Project[] = [
       "A comprehensive collection of 45 TypeScript questions designed to help developers improve their TypeScript skills. This project includes interactive questions, explanations, and sample code. Built with TypeScript and React for seamless learning experiences.",
     stack: [{ name: "TypeScript" }, { name: "JavaScript" }],
     image: "/github45.png",
-    live: "", // No live project link for this
+    live: "",
     github: "https://github.com/sami8890/45-assigment.git",
   },
 ];
@@ -194,6 +194,7 @@ const Work = () => {
                         alt={project.title}
                         layout="fill" // Fill the container
                         className="object-contain" // Tailwind utility class for object-fit
+
                       />
                     </div>
                   </div>
