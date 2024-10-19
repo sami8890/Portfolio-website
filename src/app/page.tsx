@@ -72,17 +72,15 @@ const HomePage = () => {
       <Work />
       <br />
       <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
-
-      <Services />
+      <Resume />
+  
       <br />
       <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
-
-      <Resume />
+          <Services />
       <br />
       <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
       <CertificationsSection />
       <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
-
       <br />
       <Contact />
       <br />
