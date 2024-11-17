@@ -1,4 +1,3 @@
-import { FormspreeProvider } from "@formspree/react";
 
 import { JetBrains_Mono } from "next/font/google";
 import type { Metadata } from "next";

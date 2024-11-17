@@ -9,7 +9,6 @@ import React from "react";
 import Services from "./services/page";
 import Work from "./Projects/page";
 import CertificationsSection from "./certificates/page";
-import { Contact } from "lucide-react";
 import ContactForm from "./contact/page";
 
 const HomePage = () => {

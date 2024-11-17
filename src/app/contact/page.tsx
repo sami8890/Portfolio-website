@@ -40,7 +40,7 @@ const ContactForm = () => {
             {state.succeeded ? (
               <div className="p-10 bg-[#27272c] rounded-xl">
                 <h3 className="text-2xl text-[#4ADE80]">
-                  Thanks for your message! We'll be in touch soon.
+                  Thanks for your message! We&apos;ll be in touch soon.
                 </h3>
                 <Link href="/" className="mt-4 inline-block text-2xl text-blue-600 underline">
                   Go Back to Main Section
@@ -51,7 +51,7 @@ const ContactForm = () => {
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
               >
-                <h3 className="text-4xl text-accent">Let's Work Together</h3>
+                  <h3 className="text-4xl text-accent">Let &apos;s Work Together</h3>
                 <p className="text-white/60">
                   Feel free to reach out for collaborations or questions!
                 </p>
