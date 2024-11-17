@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
+import Link from "next/link"; // Import Next.js Link
+import { useForm, ValidationError } from "@formspree/react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
@@ -19,46 +21,8 @@ const info = [
   },
 ];
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [responseMessage, setResponseMessage] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-      if (response.ok) {
-        setResponseMessage(result.message || "Message sent successfully!");
-      } else {
-        setResponseMessage(result.message || "Something went wrong.");
-      }
-    } catch {
-      setResponseMessage("Failed to send the message.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const ContactForm = () => {
+  const [state, handleSubmit] = useForm("xzzbvpol"); // Using your Form ID
 
   return (
     <motion.section
@@ -71,73 +35,128 @@ const Contact = () => {
     >
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px]">
-          {/* Form */}
+          {/* Form Section */}
           <div className="w-full xl:w-1/2 order-2 xl:order-none">
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
-            >
-              <h3 className="text-4xl text-accent">Let’s Work Together</h3>
-              <p className="text-white/60">
-              I have not added back
-              </p>
-              {/* Input fields */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  required
-                  onChange={handleInputChange}
-                />
-                <Input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  required
-                  onChange={handleInputChange}
-                />
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  required
-                  onChange={handleInputChange}
-                />
-                <Input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  required
-                  onChange={handleInputChange}
-                />
+            {state.succeeded ? (
+              <div className="p-10 bg-[#27272c] rounded-xl">
+                <h3 className="text-2xl text-[#4ADE80]">
+                  Thanks for your message! We'll be in touch soon.
+                </h3>
+                <Link href="/" className="mt-4 inline-block text-2xl text-blue-600 underline">
+                  Go Back to Main Section
+                </Link>
               </div>
-              <Textarea
-                name="message"
-                placeholder="Your Message"
-                rows={4}
-                required
-                onChange={handleInputChange}
-              />
-              {/* Submit button */}
-              <button
-                type="submit"
-                className="mt-4 px-6 py-2 bg-[#4ADE80] text-white rounded-lg hover:bg-[#83c067] transition-all"
-                disabled={loading}
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
               >
-                {loading ? "Sending..." : "Submit"}
-              </button>
-              {responseMessage && (
-                <p className="text-white mt-4">{responseMessage}</p>
-              )}
-            </form>
+                <h3 className="text-4xl text-accent">Let's Work Together</h3>
+                <p className="text-white/60">
+                  Feel free to reach out for collaborations or questions!
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* First Name */}
+                  <div>
+                    <Input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      placeholder="First Name"
+                      required
+                    />
+                    <ValidationError
+                      prefix="First Name"
+                      field="firstName"
+                      errors={state.errors}
+                      className="text-red-500 text-sm mt-1"
+                    />
+                  </div>
+                  {/* Last Name */}
+                  <div>
+                    <Input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      placeholder="Last Name"
+                      required
+                    />
+                    <ValidationError
+                      prefix="Last Name"
+                      field="lastName"
+                      errors={state.errors}
+                      className="text-red-500 text-sm mt-1"
+                    />
+                  </div>
+                  {/* Email */}
+                  <div>
+                    <Input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Email Address"
+                      required
+                    />
+                    <ValidationError
+                      prefix="Email"
+                      field="email"
+                      errors={state.errors}
+                      className="text-red-500 text-sm mt-1"
+                    />
+                  </div>
+                  {/* Phone */}
+                  <div>
+                    <Input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="Phone Number"
+                      required
+                    />
+                    <ValidationError
+                      prefix="Phone"
+                      field="phone"
+                      errors={state.errors}
+                      className="text-red-500 text-sm mt-1"
+                    />
+                  </div>
+                </div>
+                {/* Message */}
+                <div>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Your Message"
+                    rows={4}
+                    required
+                  />
+                  <ValidationError
+                    prefix="Message"
+                    field="message"
+                    errors={state.errors}
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={state.submitting}
+                  className="mt-4 px-6 py-2 bg-[#4ADE80] text-white rounded-lg hover:bg-[#83c067] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {state.submitting ? "Sending..." : "Submit"}
+                </button>
+                <Link href="/" className="mt-4 inline-block text-[#4ADE80] underline">
+                  Go Back to Main Section
+                </Link>
+              </form>
+            )}
           </div>
 
-          {/* Info */}
+          {/* Info Section */}
           <div className="flex-1 flex items-center xl:justify-self-start order-1 xl:order-none xl:mb-0 bg-[#27272c] p-10 rounded-xl h-[40vh]">
             <div className="flex flex-col gap-4">
               {info.map((item, index) => (
-                <div key={index} className="flex items-center gap-4 ">
+                <div key={index} className="flex items-center gap-4">
                   <div className="text-[#83c067]">{item.icon}</div>
                   <div>
                     <h4>{item.title}</h4>
@@ -153,4 +172,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactForm;

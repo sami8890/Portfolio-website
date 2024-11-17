@@ -10,14 +10,13 @@ const stats = [
     num: 10,
     text: "Projects Completed",
   },
+  
   {
-    num: 11,
-    text: "Node Projects",
+    num: 34,
+    text: "Github Repos",
   },
-  {
-    num: 5,
-    text: "Clients Collaborated With",
-  },
+  
+ 
 ];
 
 // When displaying the value:
@@ -30,9 +29,9 @@ export const Stats = () => {
             <div key={index} className="text-center">
               <CountUp
                 end={item.num * (item.text === "Typescript quarter 1 score" ? 100 : 1)} // Multiply by 100 for Typescript score
-                duration={6} // Shortened duration for a quicker but smooth animation
-                delay={0.5}  // Short delay to make it look more dynamic
-                className="text-4xl xl:text-6xl font-bold text-[#00ff99]"
+                duration={5} 
+                delay={1} 
+                className="text-4xl xl:text-6xl font-bold text-[#00ff99c5]"
                 suffix={item.text === "Typescript quarter 1 score" ? "%" : ""} // Add '%' for Typescript score
               />
               <p className="text-lg xl:text-xl mt-2 text-white opacity-80">{item.text}</p>

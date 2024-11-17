@@ -1,16 +1,17 @@
-import { JetBrains_Mono } from "next/font/google"
+import { FormspreeProvider } from "@formspree/react";
+
+import { JetBrains_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/ui/header";
 import PageTransition from "@/components/ui/PageTransition";
 import { StairTransition } from "@/components/ui/stairTransition";
 
-
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'] ,weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-jetbrains-mono",
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,16 +25,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body
         className={`${jetbrainsMono.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <Header />
         <StairTransition />
-        <PageTransition>
-          {children}
-         
-        </PageTransition>
-
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );

@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { FiDownload } from "react-icons/fi";
 import { Socials } from "@/components/social";
 import { Picture } from "@/components/picture";
 import { Stats } from "@/components/Stats";
-import React from 'react';
-import Contact from "./contact/page";
-import Resume from "./resume/page";
+import React from "react";
 import Services from "./services/page";
 import Work from "./Projects/page";
 import CertificationsSection from "./certificates/page";
+import { Contact } from "lucide-react";
+import ContactForm from "./contact/page";
 
 const HomePage = () => {
   const [isDownloadComplete, setIsDownloadComplete] = useState(false);
@@ -34,7 +34,9 @@ const HomePage = () => {
               <span className="text-[#00ff99]">Sami Gabol</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80">
-              I excel at crafting elegant and efficient user experiences and I am proficient in various programming languages and tools. I am passionate about writing clean, efficient, maintainable code.
+              I excel at crafting elegant and efficient user experiences and I
+              am proficient in various programming languages and tools. I am
+              passionate about writing clean, efficient, maintainable code.
             </p>
 
             {/* Button and Socials */}
@@ -71,21 +73,17 @@ const HomePage = () => {
       <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
       <Work />
       <br />
-      <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
-      <Resume />
-  
+ 
       <br />
       <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
-          <Services />
+      <Services />
       <br />
       <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
       <CertificationsSection />
       <hr className="bg-gradient-to-r from-blue-500 to-purple-600 w-[80vw] mx-auto  border-dashed " />
       <br />
-      <Contact />
+      <ContactForm />
       <br />
-
-
 
       {/* Notification after download */}
       {isDownloadComplete && (

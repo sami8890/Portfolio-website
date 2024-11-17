@@ -1,159 +1,176 @@
-
 "use client";
 
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import React from "react";
+import { Loader2 } from "lucide-react";
 
-export const Picture = (): JSX.Element => {
+interface PictureProps {
+  imageSrc?: string;
+  imageAlt?: string;
+  circleColor?: string;
+  size?: 'small' | 'medium' | 'large';
+}
+
+export const Picture: React.FC<PictureProps> = ({
+  imageSrc = "/sami-gabol.png",
+  imageAlt = "Profile Picture",
+  circleColor = "#00ff99",
+  size = 'medium'
+}) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+
+  // Size configurations
+  const sizes = {
+    small: {
+      image: "w-[200px] h-[200px]",
+      container: "w-[250px] h-[250px]",
+      circle: "w-[300px] h-[300px]"
+    },
+    medium: {
+      image: "w-[250px] h-[250px] xl:w-[350px] xl:h-[350px]",
+      container: "w-[300px] h-[300px] xl:w-[400px] xl:h-[400px]",
+      circle: "w-[350px] h-[350px] xl:w-[500px] xl:h-[500px]"
+    },
+    large: {
+      image: "w-[300px] h-[300px] xl:w-[450px] xl:h-[450px]",
+      container: "w-[350px] h-[350px] xl:w-[500px] xl:h-[500px]",
+      circle: "w-[400px] h-[400px] xl:w-[600px] xl:h-[600px]"
+    }
+  };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.8,
+      transition: {
+        duration: 0.3
+      }
+    }
+  };
+
   return (
-    <div className="w-full h-full relative flex items-center justify-center ">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          transition: {
-            delay: 2,
-            duration: 0.4,
-            ease: "easeIn",
-          },
-        }}
-        className="relative"
-      >
-        {/* Image */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: {
-              delay: 2.4,
-              duration: 0.4,
-              ease: "easeInOut",
-            },
-          }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] xl:w-[350px] xl:h-[350px] mix-blend-lighten z-40"
-        >
-          <Image
-            src="/my.png"
-            priority
-            quality={100}
-            fill
-            alt="sami-gabol"
-            className="object-contain"
-          />
-        </motion.div>
+    <div className="w-full h-full flex items-center justify-center overflow-hidden">
+      <div className="relative overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key="picture-container"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="relative"
+            role="img"
+            aria-label={imageAlt}
+          >
+            {/* Loading Spinner */}
+            <AnimatePresence>
+              {isLoading && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
+                >
+                  <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-        {/* Circle */}
-        <motion.svg
-          className="w-[300px] xl:w-[500px] h-[300px] xl:h-[500px]" // Increased size
-          fill="transparent"
-          viewBox="0 0 506 506"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <motion.circle
-            cx="253"
-            cy="253"
-            r="240" // Increased radius
-            stroke="#00ff99"
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            initial={{ strokeDasharray: "24 10 0 0" }}
-            animate={{
-              strokeDasharray: ["15 120 25 25", "16 25 95 72 ", "4 250 22 22"],
-              rotate: [120, 360],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          />
-        </motion.svg>
-      </motion.div>
+            {/* Profile Image */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: imageError ? 0 : 1,
+                transition: {
+                  delay: 1.8,
+                  duration: 0.9,
+                  ease: "easeInOut",
+                },
+              }}
+              className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${sizes[size].image} mix-blend-lighten z-40`}
+            >
+              <Image
+                src={imageSrc}
+                priority
+                quality={100}
+                fill
+                alt={imageAlt}
+                className="object-contain rounded-full"
+                onLoadingComplete={() => setIsLoading(false)}
+                onError={() => {
+                  setImageError(true);
+                  setIsLoading(false);
+                }}
+              />
+            </motion.div>
+
+            {/* Animated Circle */}
+            <div className="relative">
+              <motion.svg
+                className={`${sizes[size].circle} overflow-visible`}
+                viewBox="-3 -3 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 360 }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                style={{ margin: 'auto' }}
+              >
+                <motion.circle
+                  cx="253"
+                  cy="253"
+                  r="240"
+                  stroke={circleColor}
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="transparent"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{
+                    pathLength: 1,
+                    opacity: 1,
+                    strokeDasharray: ["15 120 25 25", "16 25 95 72", "4 250 22 22"]
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut"
+                  }}
+                />
+              </motion.svg>
+            </div>
+
+            {/* Fallback for Image Error */}
+            {imageError && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${sizes[size].image} bg-gray-200 rounded-full flex items-center justify-center`}
+              >
+                <span className="text-gray-400 text-lg">Image not available</span>
+              </motion.div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
 
-
-
-
-
-// // orignal
-// "use client";
-// // change the size of this picture 
-// import { motion } from "framer-motion";
-// import Image from "next/image";
-
-// export const Picture = () => {
-//   return (
-//     <div className="w-full h-full relative">
-//       <motion.div
-//         initial={{ opacity: 0 }}
-//         animate={{
-//           opacity: 1,
-//           transition: {
-//             delay: 2,
-//             duration: 0.4,
-//             ease: "easeIn",
-//           },
-//         }}
-//         className="relative w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-lighten"
-//       >
-//         {/* Image */}
-//         <motion.div
-//           initial={{ opacity: 0 }}
-//           animate={{
-//             opacity: 1,
-//             transition: {
-//               delay: 2.4,
-//               duration: 0.4,
-//               ease: "easeInOut",
-//             },
-//           }}
-//           className="absolute inset-0 z-10 h-[80%] mt-8"
-//         >
-//           <Image
-//             src="/my.png"
-//             priority
-//             quality={100}
-//            height={280}
-//            width={280}
-//             alt="sami"
-//             className="object-contain"
-//           />
-//         </motion.div>
-
-//         {/* Circle inside the image */}
-//         <motion.svg
-//           className="absolute top-4 left-0 w-[250px] xl:w-[500px] h-[300px] xl:h-[586px] z-0"
-//           fill="transparent"
-//           viewBox="0 0 506 506"
-//           xmlns="http://www.w3.org/2000/svg"
-//         >
-//           <motion.circle
-//             cx="253"
-//             cy="253"
-//             r="250"
-//             stroke="#00ff99"
-//             strokeWidth="4"
-//             strokeLinecap="round"
-//             strokeLinejoin="round"
-//             initial={{ strokeDasharray: "24 10 0 0" }}
-//             animate={{
-//               strokeDasharray: ["15 120 25 25", "16 25 95 72", "4 250 22 22"],
-//               rotate: [120, 360],
-//             }}
-//             transition={{
-//               duration: 20,
-//               repeat: Infinity,
-//               repeatType: "reverse",
-//             }}
-//           />
-//         </motion.svg>
-//       </motion.div>
-//     </div>
-//   );
-// };
-
-
+export default Picture;

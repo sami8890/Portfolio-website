@@ -29,19 +29,19 @@ interface Project {
 const projects: Project[] = [
   {
     num: "01",
-    category: "E-commerce Website",
-    title: "Online Store",
+    category: "Drone Website.",
+    title: "#",
     description:
-      "An e-commerce platform designed for small businesses. The is an e-commerce website that includes a responsive layout and a smooth user experience for customers. The website is fully functional with No backend added to the website yet",
+      "A Fully 3D Drone website. It is created with Next.js and TypeScript. It has a clean and a responsive design.",
     stack: [
-      { name: "Html5" },
-      { name: "Css3" },
-      { name: "Javascript" },
+      { name: "Next.js" },
+      { name: "TypeScript" },
       { name: "Tailwind" },
+      { name: "Gsap" },
     ],
-    image: "/project/project1.png",
-    live: "https://my-website-six-alpha.vercel.app/",
-    github: "https://github.com/sami8890/Ecom-website-.git",
+    image: "/project/drone.png",
+    live: "https://drone-website-theta.vercel.app/",
+    github: "https://github.com/sami8890/Drone-website.git",
   },
   {
     num: "02",
@@ -50,41 +50,44 @@ const projects: Project[] = [
     description:
       "A modern, feature-rich blog platform created with Next.js and TypeScript. The website includes features like commenting, article categories, and markdown support. Styled with Tailwind CSS for a clean, responsive design.",
     stack: [
-      { name: "Html5" },
-      { name: "Tailwind" },
-      { name: "Javascript" },
-      { name: "TypeScript" },
       { name: "Next.js" },
+      { name: "TypeScript" },
+      { name: "Tailwind" },
+      { name: "Gsap" },
     ],
-    image: "/project/project2.png",
-    live: "#",
-    github: "#",
+    image: "/project/blog.png",
+    live: "https://blog-website-rust-one.vercel.app/",
+    github: "https://github.com/sami8890/blog-website.git",
   },
   {
     num: "03",
-    category: "Resume Builder Hackathon",
-    title: "Resume Builder App",
+    category: "Real- State Website",
+    title: "Real state Website",
     description:
-      "A web application created during a hackathon that allows users to easily generate a professional resume by filling out a simple form. The app automatically formats the resume and allows users to download it in various formats (PDF, DOCX). Built with React and styled using Tailwind CSS.",
-    stack: [{ name: "Html" }, { name: "CSS" }, { name: "Typescript" }],
-    image: "/project/project3.png",
-    live: "https://hackaton-milestone-no-5-bj6t.vercel.app/",
-    github: "https://github.com/sami8890/hackaton-milestone-No-5.git",
+      "A Real State website created with Next.js and TypeScript. It has a clean and a responsive design. It is built with Next.js and TypeScript. It has a clean and a responsive design. ",
+    stack: [
+      { name: "NEXT.js" },
+      { name: "Tailwind.CSS" },
+      { name: "Typescript" },
+      { name: "Gsap" },
+    ],
+    image: "/project/realstate.png",
+    live: "https://rebuild-com.vercel.app/",
+    github: "https://github.com/sami8890/rebuild.com.git",
   },
   {
     num: "04",
-    category: "45 Questions of TypeScript And Javascript",
-    title: "45 Questions",
+    category: "A pixel perfect landing page",
+    title: "Landing Page",
     description:
-      "A comprehensive collection of 45 TypeScript questions designed to help developers improve their TypeScript skills. This project includes interactive questions, explanations, and sample code. Built with TypeScript and React for seamless learning experiences.",
-    stack: [{ name: "TypeScript" }, { name: "JavaScript" }],
-    image: "/project/project4.png",
-    live: "",
-    github: "https://github.com/sami8890/45-assigment.git",
+      "This is a landing page created with Next.js and TypeScript. From Figma Design.  It has a clean and a responsive design. It is built with Next.js and TypeScript. It has a clean and a responsive design. ",
+    stack: [{ name: "NEXT.js" }, { name: "Tailwind CSS" }, { name: "Typescript" }],
+    image: "/project/landingpage.png",
+    live: "https://figma-to-nextjs-blog-website.vercel.app/",
+    github: "https://github.com/sami8890/figma-to-nextjs-blog_website.git",
   },
+
 ];
-
-
 
 const Work = () => {
   const [project, setProject] = useState<Project>(projects[0]);
@@ -187,14 +190,13 @@ const Work = () => {
             >
               {projects.map((project, index) => (
                 <SwiperSlide key={index} className="w-full">
-                  <div className="h-[350px] max-h-[60vh] relative group flex justify-center items-center bg-pink-50/20">
+                  <div className="h-[500px] max-h-[60vh] relative group flex justify-center items-center bg-pink-50/20">
                     <div className="relative w-full h-full">
                       <Image
                         src={project.image}
                         alt={project.title}
-                        layout="fill" // Fill the container
-                        className="object-contain" // Tailwind utility class for object-fit
-
+                        layout="fill"
+                        className="object-contain "
                       />
                     </div>
                   </div>
